@@ -1,0 +1,78 @@
+@font-face {
+    font-family: Gotham;
+    src: url(fonts/Gotham-Thin.otf);
+}
+
+#start {
+    color: #11B5E4;
+    font-family: Gotham;
+    letter-spacing: 7px;
+    cursor: pointer;
+    visibility: visible;
+}
+
+#reset {
+    color: #11B5E4;
+    font-family: Gotham;
+    letter-spacing: 7px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+#time {
+    color: #11B5E4;
+    font-family: Gotham;
+    letter-spacing: 7px;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+#sidebar {
+    background-color: #172521;
+    height: 100%;
+    width: 0px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+}
+
+.toggle {
+    color: #11B5E4;
+    font-family: Gotham;
+    letter-spacing: 7px;
+    transition: 0.3s;
+    z-index: 2;
+    opacity: 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+#sidebarIcon {
+    height: 50px;
+    width: 50px;
+    top: 0;
+    left: 0;
+    position: fixed;
+    transition: 0.5s;
+    z-index: 2;
+    cursor: pointer;
+}
+
+#container1 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00100B;
+    flex-direction: column;
+}
+
+html, body {
+   height: 100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+}

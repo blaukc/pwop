@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='main.js'></script>
+    <link rel='stylesheet' type='text/css' href='main.css'>
+</head>
+<body>
+    <div id='sidebar'>
+        <h3 class='toggle' id='mode' onclick='changeMode()'>Speech</h3>
+        <h3 class='toggle' id='timer' onclick='changeTimer()'>Show timer</h3>
+        <h3 class='toggle' id='stop' onclick='reset()'>Force stop</h3>
+    </div>
+    <div id='container1'>
+        <h1 id='time'></h1>
+        <h1 id='start' onclick='start()'>start</h1>
+        <h1 id='reset' onclick='reset()'>reset</h1>
+    </div>
+    <img src="sidebar.png" id='sidebarIcon' onclick='sidebar()'>
+</body>
+</html>
