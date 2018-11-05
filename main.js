@@ -7,6 +7,11 @@ var i = 0, j = 0, t;
 var ding = new Audio('ding.wav');
 var questionList, asked = [], n, asking = false;
 var force = false;
+var repeatOn = false, repeating = false;
+var repeat = document.createElement('h3');
+var repeatText = document.createTextNode('Repeat Question');
+repeat.appendChild(repeatText);
+
 
 window.onload = function () {
     document.getElementById('time').innerHTML = min + ':' + sec;
@@ -18,11 +23,12 @@ window.onload = function () {
 function increaseTime() {
     j += 1;
     if (j < 10) {
+        min = i.toString();
         sec = '0' + j.toString();
     } else if (j === 60) {
         i += 1;
         j = 0;
-        min = i;
+        min = i.toString();
         sec = '00';
     } else {
         sec = j.toString();
@@ -36,6 +42,34 @@ function increaseTime() {
         ding.play();
     }
     document.getElementById('time').innerHTML = min + ':' + sec;
+}
+
+function repeatQn() {
+    document.getElementById('repeat').style.visibility = 'hidden';
+    if (!repeating) {
+        repeating = true;
+        window.utterances = [];
+        var qn = new SpeechSynthesisUtterance(questionList[n]);
+        utterances.push(qn);
+        speechSynthesis.speak(qn);
+    }
+    qn.onend = function () {
+        document.getElementById('repeat').style.visibility = 'visible';
+        repeating = false;
+    };
+    
+}
+
+function addRepeat() {
+    repeatOn = true;
+    repeat.setAttribute('class', 'toggle');
+    repeat.setAttribute('id', 'repeat');
+    repeat.setAttribute('onclick', 'repeatQn()');
+    var forceStop = document.getElementById('stop');
+    forceStop.parentNode.insertBefore(repeat, forceStop);
+    if (!x) {
+        repeat.style.opacity = '1';
+    }
 }
 
 function startTime() {
@@ -64,8 +98,9 @@ function readQuestion() {
     utterances.push(qn);
     speechSynthesis.speak(qn);
     qn.onend = function () {
-        if (!force){
+        if (!force) {
             startTime();
+            addRepeat();
         }
     };
 }
@@ -89,6 +124,9 @@ function sidebar() {
         document.getElementsByClassName('toggle')[1].style.opacity = '1';
         document.getElementsByClassName('toggle')[2].style.opacity = '1';
         document.getElementsByClassName('toggle')[3].style.opacity = '1';
+        if (repeatOn) {
+            document.getElementsByClassName('toggle')[4].style.opacity = '1';
+        }
         x = false;
     } else {
         document.getElementById('sidebar').style.width = '0px';
@@ -97,6 +135,9 @@ function sidebar() {
         document.getElementsByClassName('toggle')[1].style.opacity = '0';
         document.getElementsByClassName('toggle')[2].style.opacity = '0';
         document.getElementsByClassName('toggle')[3].style.opacity = '0';
+        if (repeatOn) {
+            document.getElementsByClassName('toggle')[4].style.opacity = '0';
+        }
         x = true;
     }
 }
@@ -141,6 +182,12 @@ function changeQuestion() {
 
 function reset() {
     force = true;
+    if (repeatOn) {
+        document.getElementById('repeat').style.visibility = 'visible';
+        document.getElementById('repeat').outerHTML = '';
+    }
+    repeating = false;
+    repeatOn = false;
     speechSynthesis.cancel();
     asking = 0;
     clearInterval(t);
