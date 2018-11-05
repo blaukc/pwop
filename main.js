@@ -1,11 +1,12 @@
 /*jslint plusplus: true */
 var x = true;
 var mode = 'speech';
-var timer = true;
+var timer = true, qnHide = true;
 var min = 0, sec = '00';
 var i = 0, j = 0, t;
 var ding = new Audio('ding.wav');
-var questionList, asked = [], n;
+var questionList, asked = [], n, asking = false;
+var force = false;
 
 window.onload = function () {
     document.getElementById('time').innerHTML = min + ':' + sec;
@@ -43,6 +44,7 @@ function startTime() {
 }
 
 function readQuestion() {
+    asking = true;
     while (true) {
         n = Math.floor(Math.random() * questionList.length);
         if (!asked.includes(n)) {
@@ -53,16 +55,23 @@ function readQuestion() {
             asked = [];
         }
     }
+    document.getElementById('question').innerHTML = questionList[n];
+    if (!qnHide) {
+        document.getElementById('question').style.opacity = '1';
+    }
     window.utterances = [];
     var qn = new SpeechSynthesisUtterance(questionList[n]);
     utterances.push(qn);
     speechSynthesis.speak(qn);
     qn.onend = function () {
-        startTime();
+        if (!force){
+            startTime();
+        }
     };
 }
 
 function start() {
+    force = false;
     document.getElementById('start').style.visibility = 'hidden';
     document.getElementById('modeToggle').style.visibility = 'hidden';
     if (mode === 'speech') {
@@ -114,12 +123,33 @@ function changeTimer() {
     }
 }
 
+function changeQuestion() {
+    if (qnHide) {
+        document.getElementById('questionToggle').innerHTML = 'Hide Question';
+        if (asking) {
+            document.getElementById('question').style.opacity = '1';
+        }
+        qnHide = false;
+    } else {
+        document.getElementById('questionToggle').innerHTML = 'Show Question';
+        if (asking) {
+            document.getElementById('question').style.opacity = '0';
+        }
+        qnHide = true;
+    }
+}
+
 function reset() {
+    force = true;
+    speechSynthesis.cancel();
+    asking = 0;
     clearInterval(t);
     i = 0;
     j = 0;
     document.getElementById('reset').style.visibility = 'hidden';
     document.getElementById('start').style.visibility = 'visible';
-    document.getElementById('mode').style.visibility = 'visible';
+    document.getElementById('modeToggle').style.visibility = 'visible';
     document.getElementById('time').innerHTML = '0:00';
+    document.getElementById('question').innerHTML = '';
+    document.getElementById('question').style.opacity = '0';
 }

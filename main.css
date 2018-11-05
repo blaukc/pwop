@@ -9,6 +9,7 @@
     letter-spacing: 7px;
     cursor: pointer;
     visibility: visible;
+    text-align: center;
 }
 
 #reset {
@@ -17,6 +18,7 @@
     letter-spacing: 7px;
     cursor: pointer;
     visibility: hidden;
+    text-align: center;
 }
 
 #time {
@@ -25,6 +27,17 @@
     letter-spacing: 7px;
     opacity: 0;
     transition: 0.5s;
+    text-align: center;
+}
+
+#question {
+    color: #11B5E4;
+    font-family: Gotham;
+    letter-spacing: 7px;
+    opacity: 0;
+    transition: 0.5s;
+    width: 70%;
+    text-align: center;
 }
 
 #sidebar {
