@@ -2,13 +2,16 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src='main.js'></script>
     <link rel='stylesheet' type='text/css' href='main.css'>
 </head>
 <body>
     <div id='sidebar'>
-        <h3 class='toggle' id='mode' onclick='changeMode()'>Speech</h3>
-        <h3 class='toggle' id='timer' onclick='changeTimer()'>Show timer</h3>
+        <h3 class='toggle' id='modeToggle' onclick='changeMode()'>Speech</h3>
+        <h3 class='toggle' id='timerToggle' onclick='changeTimer()'>Show timer</h3>
+        <h3 class='toggle' id='questionToggle' onclick='changeTimer()'>Show question</h3>
         <h3 class='toggle' id='stop' onclick='reset()'>Force stop</h3>
     </div>
     <div id='container1'>
