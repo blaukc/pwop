@@ -110,6 +110,7 @@ function start() {
     document.getElementById('start').style.visibility = 'hidden';
     document.getElementById('modeToggle').style.visibility = 'hidden';
     if (mode === 'speech') {
+        document.getElementById('questionToggle').style.visibility = 'hidden';
         startTime();
     } else if (mode === 'qna') {
         readQuestion();
@@ -193,6 +194,7 @@ function reset() {
     clearInterval(t);
     i = 0;
     j = 0;
+    document.getElementById('questionToggle').style.visibility = 'visible';
     document.getElementById('reset').style.visibility = 'hidden';
     document.getElementById('start').style.visibility = 'visible';
     document.getElementById('modeToggle').style.visibility = 'visible';
