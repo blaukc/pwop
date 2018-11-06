@@ -183,6 +183,7 @@ function changeQuestion() {
 
 function reset() {
     force = true;
+    document.getElementById('repeat').style.opacity = '0';
     if (repeatOn) {
         document.getElementById('repeat').style.visibility = 'visible';
         document.getElementById('repeat').outerHTML = '';
