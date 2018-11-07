@@ -1,4 +1,4 @@
-/*jslint plusplus: true */
+/*jslint plusplus:true */
 var x = true;
 var mode = 'speech';
 var timer = true, qnHide = true;
